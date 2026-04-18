@@ -8,6 +8,7 @@
 <title>Pak E Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
@@ -16,8 +17,11 @@
 <p class="sub">Premium Games Loading Store</p>
 
 <input type="text" id="name" placeholder="Full Name">
+
 <input type="text" id="phone" placeholder="Mobile Number">
+
 <input type="email" id="email" placeholder="Email Address">
+
 <textarea id="address" placeholder="Complete Address with House No / Area / City"></textarea>
 
 <select id="hdd" onchange="updateAll()">
@@ -35,6 +39,7 @@
 <div id="priceBox"></div>
 
 <h2>Select Games</h2>
+
 <div id="gamesList"></div>
 
 <div id="warning"></div>
@@ -43,34 +48,39 @@
 
 <h2>Payment Details</h2>
 
-<div class="payRow">
-<span><b>Bank:</b> Bank Alfalah</span>
+<div class="payLine">
+<b>Bank:</b> Bank Alfalah
 </div>
 
-<div class="payRow">
-<span><b>Title:</b> Pak E Store</span>
+<div class="payLine">
+<b>Title:</b> Pak E Store
 </div>
 
-<div class="payRow">
-<span><b>Account:</b> 02161009500017</span>
-<button class="copyBtn" onclick="copyText('02161009500017')">📋</button>
+<div class="payLine">
+<b>Account:</b> 02161009500017
+<span class="miniCopy" onclick="copyText('02161009500017')">📋</span>
 </div>
 
-<div class="payRow">
-<span><b>IBAN:</b> PK50ALFH0216001009500017</span>
-<button class="copyBtn" onclick="copyText('PK50ALFH0216001009500017')">📋</button>
+<div class="payLine">
+<b>IBAN:</b> PK50ALFH0216001009500017
+<span class="miniCopy" onclick="copyText('PK50ALFH0216001009500017')">📋</span>
 </div>
 
 <p class="note">
-Place order first, then transfer advance payment. Remaining amount Cash on Delivery. Send screenshot on WhatsApp.
+Place order first, then transfer advance payment.
+Remaining amount Cash on Delivery.
+Send screenshot on WhatsApp.
 </p>
 
 </div>
 
-<button class="mainBtn" onclick="sendOrder()">Confirm Order</button>
+<button class="mainBtn" onclick="sendOrder()">
+Confirm Order
+</button>
 
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
