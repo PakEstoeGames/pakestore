@@ -284,17 +284,10 @@ window.scrollTo(0,0);
 
 function placeOrder(){
 
-const name =
-document.getElementById("name").value.trim();
-
-const phone =
-document.getElementById("phone").value.trim();
-
-const email =
-document.getElementById("email").value.trim();
-
-const address =
-document.getElementById("address").value.trim();
+const name = document.getElementById("name").value.trim();
+const phone = document.getElementById("phone").value.trim();
+const email = document.getElementById("email").value.trim();
+const address = document.getElementById("address").value.trim();
 
 if(name==""){
 alert("Please Enter Full Name");
@@ -311,23 +304,56 @@ alert("Please Enter Complete Address");
 return;
 }
 
-const storage =
-document.getElementById("storage").value;
+const storage = document.getElementById("storage").value;
+const variant = document.getElementById("variant").value;
+const price = prices[storage][variant];
 
-const variant =
-document.getElementById("variant").value;
+let total = 0;
+let selectedGames = "";
 
-const price =
-prices[storage][variant];
+document.querySelectorAll("#gamesList input").forEach(box=>{
+
+if(box.checked){
+
+total += games[box.value].size;
+
+selectedGames += "🎮 " + games[box.value].name +
+" (" + games[box.value].size + " GB)%0A";
+
+}
+
+});
+
+let advance = 500;
+let cod = price - advance;
+
+const msg =
+"🛒 *NEW ORDER RECEIVED*%0A%0A"+
+"👤 *Customer Details*%0A"+
+"━━━━━━━━━━━━%0A"+
+"🙍 Name: " + name + "%0A"+
+"📞 Phone: " + phone + "%0A"+
+"📧 Email: " + email + "%0A"+
+"🏠 Address: " + address + "%0A%0A"+
+
+"💽 *Selected HDD*%0A"+
+"━━━━━━━━━━━━%0A"+
+"📦 Size: " + storage + " GB%0A"+
+"🖥 Variant: " + variant + "%0A"+
+"💰 Total Price: Rs " + price + "%0A"+
+"💵 Advance Payment: Rs " + advance + "%0A"+
+"🚚 Cash On Delivery: Rs " + cod + "%0A%0A"+
+
+"🎮 *Selected Games*%0A"+
+"━━━━━━━━━━━━%0A"+
+selectedGames + "%0A"+
+
+"📊 Total Games Size: " + total + " GB%0A%0A"+
+
+"✅ Please Confirm This Order.";
 
 window.open(
-"https://wa.me/923262281245?text=New Order%0AName: "+name+
-"%0APhone: "+phone+
-"%0AEmail: "+email+
-"%0AAddress: "+address+
-"%0AHDD: "+storage+" GB"+
-"%0AVariant: "+variant+
-"%0APrice: Rs "+price,
+"https://wa.me/923262281245?text=" + msg,
 "_blank"
 );
 
