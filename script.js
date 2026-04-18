@@ -1,4 +1,4 @@
-/* script.js FINAL FIXED */
+/* Pak E Store Final Complete JS */
 
 const prices = {
 320:{portable:6500,internal:5000},
@@ -14,6 +14,7 @@ const freeSpace = {
 2000:1830
 };
 
+/* Replace this games list with your full list if needed */
 const games = [
 {name:"Grand Theft Auto 5 Legacy with Pakistani Modes",size:150},
 {name:"Grand Theft Auto IV",size:35},
@@ -175,12 +176,14 @@ const games = [
 {name:"Ghost Of Tsushima",size:70}
 ];
 
+/* Load Start */
+
 window.onload = function(){
 renderGames();
 updateAll();
 };
 
-/* Games Load */
+/* Show Games */
 
 function renderGames(){
 
@@ -191,7 +194,7 @@ for(let i=0;i<games.length;i++){
 html += `
 <label class="gameRow">
 <span>${games[i].name} - ${games[i].size} GB</span>
-<input type="checkbox" onchange="updateAll()" value="${i}">
+<input type="checkbox" value="${i}" onchange="updateAll()">
 </label>
 `;
 
@@ -201,33 +204,26 @@ document.getElementById("gamesList").innerHTML = html;
 
 }
 
-/* Update */
+/* Live Update */
 
 function updateAll(){
 
-const storage =
-document.getElementById("storage").value;
+const storage = document.getElementById("storage").value;
+const variant = document.getElementById("variant").value;
 
-const variant =
-document.getElementById("variant").value;
-
-const price =
-prices[storage][variant];
+const price = prices[storage][variant];
 
 let total = 0;
 
 document.querySelectorAll("#gamesList input").forEach(box=>{
 
 if(box.checked){
-
 total += games[box.value].size;
-
 }
 
 });
 
-const remain =
-freeSpace[storage] - total;
+const remain = freeSpace[storage] - total;
 
 document.getElementById("price").innerHTML =
 "Price: Rs " + price;
@@ -240,37 +236,30 @@ document.getElementById("remaining").innerHTML =
 
 }
 
-/* Next */
+/* Next Step */
 
 function goNext(){
 
-const storage =
-document.getElementById("storage").value;
+const storage = document.getElementById("storage").value;
 
 let total = 0;
 
 document.querySelectorAll("#gamesList input").forEach(box=>{
 
 if(box.checked){
-
 total += games[box.value].size;
-
 }
 
 });
 
-if(total == 0){
-
+if(total === 0){
 alert("Please Select Games");
 return;
-
 }
 
 if(total > freeSpace[storage]){
-
 alert("Selected HDD Full. Please Choose Bigger HDD");
 return;
-
 }
 
 document.getElementById("page1").style.display = "none";
@@ -280,7 +269,7 @@ window.scrollTo(0,0);
 
 }
 
-/* Order */
+/* Final Order */
 
 function placeOrder(){
 
@@ -317,18 +306,20 @@ if(box.checked){
 
 total += games[box.value].size;
 
-selectedGames += "🎮 " + games[box.value].name +
+selectedGames +=
+"🎮 " + games[box.value].name +
 " (" + games[box.value].size + " GB)%0A";
 
 }
 
 });
 
-let advance = 500;
-let cod = price - advance;
+const advance = 500;
+const cod = price - advance;
 
 const msg =
 "🛒 *NEW ORDER RECEIVED*%0A%0A"+
+
 "👤 *Customer Details*%0A"+
 "━━━━━━━━━━━━%0A"+
 "🙍 Name: " + name + "%0A"+
