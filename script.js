@@ -1,4 +1,4 @@
-/* script.js FINAL */
+/* script.js FINAL - No Browser Alert */
 
 const games = [
 {name:"GTA V",size:90},
@@ -34,7 +34,7 @@ const advanceAmounts = {
 
 let selectedGames = [];
 
-/* Popup Functions */
+/* Custom Popup */
 
 function showPopup(text){
 document.getElementById("popupText").innerText = text;
@@ -45,7 +45,7 @@ function closePopup(){
 document.getElementById("popup").style.display = "none";
 }
 
-/* Welcome Message */
+/* On Load */
 
 window.onload = function(){
 loadGames();
@@ -111,8 +111,6 @@ totalSize += selectedGames[i].size;
 
 const remain = freeSpace[hdd] - totalSize;
 
-/* Website Box */
-
 document.getElementById("priceBox").innerHTML = `
 Price: Rs ${price}<br>
 Selected Games Size: ${totalSize} GB<br>
@@ -134,7 +132,7 @@ document.getElementById("warning").innerText = warning;
 
 }
 
-/* Copy Functions */
+/* Copy */
 
 function copyText(text,type){
 
@@ -150,7 +148,7 @@ showPopup("IBAN Copied Successfully");
 
 }
 
-/* Place Order */
+/* Order */
 
 function sendOrder(){
 
@@ -196,8 +194,6 @@ return;
 const price = prices[hdd][type];
 const advance = advanceAmounts[hdd];
 const cod = price - advance;
-
-/* WhatsApp Message */
 
 let msg = "🛒 NEW ORDER RECEIVED%0A%0A";
 
