@@ -1,10 +1,4 @@
-/* script.js
-Fix:
-✅ Website price box se Advance/COD remove
-✅ WhatsApp message me Advance/COD rahega
-*/
-
-alert("Welcome to Pak E Store");
+/* script.js FINAL */
 
 const games = [
 {name:"GTA V",size:90},
@@ -40,6 +34,27 @@ const advanceAmounts = {
 
 let selectedGames = [];
 
+/* Popup Functions */
+
+function showPopup(text){
+document.getElementById("popupText").innerText = text;
+document.getElementById("popup").style.display = "flex";
+}
+
+function closePopup(){
+document.getElementById("popup").style.display = "none";
+}
+
+/* Welcome Message */
+
+window.onload = function(){
+loadGames();
+updateAll();
+showPopup("Welcome to Pak E Store");
+};
+
+/* Load Games */
+
 function loadGames(){
 
 let html = "";
@@ -61,6 +76,8 @@ document.getElementById("gamesList").innerHTML = html;
 
 }
 
+/* Select Game */
+
 function toggleGame(index){
 
 const game = games[index];
@@ -77,6 +94,8 @@ updateAll();
 
 }
 
+/* Update Price */
+
 function updateAll(){
 
 const hdd = document.getElementById("hdd").value;
@@ -92,7 +111,8 @@ totalSize += selectedGames[i].size;
 
 const remain = freeSpace[hdd] - totalSize;
 
-/* WEBSITE PAR SIRF YEH SHOW HOGA */
+/* Website Box */
+
 document.getElementById("priceBox").innerHTML = `
 Price: Rs ${price}<br>
 Selected Games Size: ${totalSize} GB<br>
@@ -110,9 +130,27 @@ if(hdd == 2000) warning = "Too many games selected.";
 
 }
 
-document.getElementById("warning").innerHTML = warning;
+document.getElementById("warning").innerText = warning;
 
 }
+
+/* Copy Functions */
+
+function copyText(text,type){
+
+navigator.clipboard.writeText(text);
+
+if(type=="account"){
+showPopup("Account Number Copied Successfully");
+}
+
+if(type=="iban"){
+showPopup("IBAN Copied Successfully");
+}
+
+}
+
+/* Place Order */
 
 function sendOrder(){
 
@@ -122,22 +160,22 @@ const email = document.getElementById("email").value.trim();
 const address = document.getElementById("address").value.trim();
 
 if(name.length < 3){
-alert("Please enter full name");
+showPopup("Please Enter Full Name");
 return;
 }
 
 if(phone.length < 11){
-alert("Please enter valid mobile number");
+showPopup("Please Enter Valid Mobile Number");
 return;
 }
 
 if(email.length < 5){
-alert("Please enter valid email");
+showPopup("Please Enter Valid Email");
 return;
 }
 
 if(address.length < 15){
-alert("Please enter complete address");
+showPopup("Please Enter Complete Address");
 return;
 }
 
@@ -151,7 +189,7 @@ totalSize += selectedGames[i].size;
 }
 
 if(totalSize > freeSpace[hdd]){
-alert("Selected HDD full. Please choose bigger HDD.");
+showPopup("Selected HDD Full. Please Choose Bigger HDD");
 return;
 }
 
@@ -159,7 +197,7 @@ const price = prices[hdd][type];
 const advance = advanceAmounts[hdd];
 const cod = price - advance;
 
-/* WHATSAPP MESSAGE ME ADVANCE RAHEGA */
+/* WhatsApp Message */
 
 let msg = "🛒 NEW ORDER RECEIVED%0A%0A";
 
@@ -183,6 +221,3 @@ msg += (i+1) + ". " + selectedGames[i].name + " - " + selectedGames[i].size + "G
 window.open("https://wa.me/923262281245?text=" + msg,"_blank");
 
 }
-
-loadGames();
-updateAll();
