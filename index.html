@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Pak E Store</title>
+<meta charset="UTF-8">
+<title>Pak Games Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>Pak E Store</h1>
+<h1>Pak Games Store</h1>
 
-<button>Order Now</button>
+<select id="hdd">
+<option value="160">160 GB</option>
+<option value="320">320 GB</option>
+<option value="500">500 GB</option>
+<option value="1000">1 TB</option>
+</select>
+
+<select id="type">
+<option value="portable">Portable</option>
+<option value="internal">Internal</option>
+</select>
+
+<div id="price"></div>
+
+<div id="gamesList"></div>
+
+<button onclick="sendOrder()">Confirm Order</button>
 
 <script src="script.js"></script>
+
 </body>
 </html>
