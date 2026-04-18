@@ -1,9 +1,9 @@
-/* style.css - Updated Small Copy Buttons + Small Right Checkboxes */
+/* style.css FINAL */
 
 body{
 margin:0;
 padding:0;
-font-family:Arial,sans-serif;
+font-family:Arial, sans-serif;
 background:#f2f2f7;
 color:#111;
 }
@@ -17,13 +17,14 @@ padding:20px;
 h1{
 text-align:center;
 font-size:34px;
-margin-bottom:5px;
+margin:10px 0 5px;
 }
 
 .sub{
 text-align:center;
 color:#666;
-margin-bottom:20px;
+margin:0 0 20px;
+font-size:15px;
 }
 
 h2{
@@ -31,6 +32,8 @@ text-align:center;
 font-size:24px;
 margin:25px 0 15px;
 }
+
+/* Inputs */
 
 input,
 textarea,
@@ -43,6 +46,7 @@ border-radius:16px;
 background:#fff;
 font-size:16px;
 box-sizing:border-box;
+outline:none;
 }
 
 textarea{
@@ -51,15 +55,28 @@ resize:none;
 }
 
 /* Price Box */
+
 #priceBox{
 background:#fff;
 padding:16px;
-border-radius:16px;
+border-radius:18px;
 line-height:1.8;
+font-size:16px;
 margin-top:10px;
 }
 
-/* Games Cards */
+/* Warning */
+
+#warning{
+color:#e60000;
+font-weight:bold;
+margin-top:10px;
+font-size:15px;
+text-align:center;
+}
+
+/* Games */
+
 .game{
 background:#fff;
 padding:16px;
@@ -67,29 +84,23 @@ border-radius:18px;
 margin:10px 0;
 }
 
-.game label{
+.gameRow{
 display:flex;
 justify-content:space-between;
 align-items:center;
 gap:10px;
-width:100%;
 font-size:16px;
+width:100%;
 }
 
 .game input[type="checkbox"]{
 width:18px;
 height:18px;
-order:2;
-}
-
-#warning{
-color:#e60000;
-font-weight:bold;
-margin-top:10px;
-font-size:15px;
+flex-shrink:0;
 }
 
 /* Payment Box */
+
 .paymentBox{
 background:#fff;
 padding:16px;
@@ -97,60 +108,86 @@ border-radius:18px;
 margin-top:25px;
 }
 
-.payRow{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
+.payLine{
 padding:8px 0;
-border-bottom:1px solid #eee;
-font-size:15px;
-}
-
-.payRow:last-child{
-border-bottom:none;
-}
-
-/* Small Copy Button */
-.copyBtn{
-width:34px !important;
-height:34px !important;
-min-width:34px;
-padding:0 !important;
-border:none;
-border-radius:10px;
-background:#22c55e;
-color:#fff;
 font-size:16px;
-display:flex;
-align-items:center;
-justify-content:center;
+line-height:1.6;
+word-break:break-word;
+}
+
+.miniCopy{
+display:inline-block;
+margin-left:8px;
+font-size:18px;
 cursor:pointer;
-flex-shrink:0;
-margin:0;
 }
 
 /* Note */
+
 .note{
 font-size:14px;
 line-height:1.6;
 color:#555;
-margin-top:14px;
+margin-top:12px;
 }
 
 /* Main Button */
+
 .mainBtn{
 width:100%;
 padding:16px;
-margin-top:20px;
+margin-top:22px;
 border:none;
-border-radius:16px;
+border-radius:18px;
 background:#0071e3;
 color:#fff;
 font-size:18px;
 cursor:pointer;
 }
 
-button:hover{
+/* Popup */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popupBox{
+background:#fff;
+width:85%;
+max-width:320px;
+padding:22px;
+border-radius:22px;
+text-align:center;
+}
+
+.popupBox p{
+font-size:18px;
+line-height:1.5;
+margin:0 0 18px;
+}
+
+.popupBox button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#0071e3;
+color:#fff;
+font-size:17px;
+cursor:pointer;
+}
+
+button:hover,
+.mainBtn:hover,
+.popupBox button:hover{
 opacity:0.95;
 }
