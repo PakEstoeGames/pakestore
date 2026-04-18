@@ -26,10 +26,10 @@ const freeSpace = {
 };
 
 const advanceAmounts = {
-320:1000,
+320:500,
 500:1500,
-1000:2500,
-2000:5000
+1000:5000,
+2000:10000
 };
 
 let selectedGames = [];
