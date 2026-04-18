@@ -101,7 +101,7 @@ msg += g.name+" - "+g.size+"GB%0A";
 });
 
 window.open(
-"https://wa.me/923001234567?text="+msg
+"https://wa.me/923262281245?text="+msg
 );
 }
 
