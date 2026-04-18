@@ -1,0 +1,14 @@
+body{
+background:#f2f2f7;
+font-family:-apple-system;
+text-align:center;
+padding:40px;
+}
+
+button{
+background:#0071e3;
+color:white;
+padding:15px 30px;
+border:none;
+border-radius:20px;
+}
