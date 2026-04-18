@@ -1,4 +1,6 @@
-alert("Welcome to Pak Games Store");
+/* script.js */
+
+alert("Welcome to Pak E Store");
 
 const games = [
 {name:"GTA V",size:90},
@@ -7,7 +9,8 @@ const games = [
 {name:"Watch Dogs 2",size:40},
 {name:"Hogwarts Legacy",size:80},
 {name:"Spider Man 2",size:95},
-{name:"Tekken 8",size:65}
+{name:"Tekken 8",size:65},
+{name:"Far Cry 6",size:70}
 ];
 
 const prices = {
@@ -22,6 +25,13 @@ const freeSpace = {
 500:450,
 1000:930,
 2000:1830
+};
+
+const advanceAmounts = {
+320:1000,
+500:1500,
+1000:2500,
+2000:5000
 };
 
 let selectedGames = [];
@@ -44,109 +54,145 @@ ${games[i].name} - ${games[i].size} GB
 }
 
 document.getElementById("gamesList").innerHTML = html;
+
 }
 
-function toggleGame(i){
+function toggleGame(index){
 
-let game = games[i];
+const game = games[index];
 
-let found = selectedGames.find(g=>g.name===game.name);
+const exists = selectedGames.find(item => item.name === game.name);
 
-if(found){
-selectedGames = selectedGames.filter(g=>g.name!==game.name);
+if(exists){
+selectedGames = selectedGames.filter(item => item.name !== game.name);
 }else{
 selectedGames.push(game);
 }
 
 updateAll();
+
 }
 
 function updateAll(){
 
-let hdd = document.getElementById("hdd").value;
-let type = document.getElementById("type").value;
+const hdd = document.getElementById("hdd").value;
+const type = document.getElementById("type").value;
 
-let price = prices[hdd][type];
+const price = prices[hdd][type];
 
-let total = 0;
+let totalSize = 0;
 
 for(let i=0;i<selectedGames.length;i++){
-total += selectedGames[i].size;
+totalSize += selectedGames[i].size;
 }
 
-let remain = freeSpace[hdd] - total;
+const remain = freeSpace[hdd] - totalSize;
 
-document.getElementById("priceBox").innerHTML =
-"Price: Rs " + price +
-"<br>Selected Games Size: " + total + " GB" +
-"<br>Remaining Space: " + remain + " GB";
+const advance = advanceAmounts[hdd];
+const cod = price - advance;
+
+document.getElementById("priceBox").innerHTML = `
+Price: Rs ${price}<br>
+Advance: Rs ${advance}<br>
+Cash on Delivery: Rs ${cod}<br>
+Selected Games Size: ${totalSize} GB<br>
+Remaining Space: ${remain} GB
+`;
 
 let warning = "";
 
 if(remain < 0){
 
-warning = "Selected HDD Full! ";
-
-if(hdd == 320) warning += "Choose 500 GB";
-if(hdd == 500) warning += "Choose 1 TB";
-if(hdd == 1000) warning += "Choose 2 TB";
-if(hdd == 2000) warning += "Too many games selected";
+if(hdd == 320) warning = "Selected HDD Full. Please choose 500 GB.";
+if(hdd == 500) warning = "Selected HDD Full. Please choose 1 TB.";
+if(hdd == 1000) warning = "Selected HDD Full. Please choose 2 TB.";
+if(hdd == 2000) warning = "Too many games selected.";
 
 }
 
 document.getElementById("warning").innerHTML = warning;
+
+}
+
+function copyText(text){
+
+navigator.clipboard.writeText(text);
+
+alert("Copied Successfully");
+
 }
 
 function sendOrder(){
 
-let name = document.getElementById("name").value.trim();
-let phone = document.getElementById("phone").value.trim();
-let address = document.getElementById("address").value.trim();
+const name = document.getElementById("name").value.trim();
+const phone = document.getElementById("phone").value.trim();
+const email = document.getElementById("email").value.trim();
+const address = document.getElementById("address").value.trim();
 
 if(name.length < 3){
-alert("Enter Full Name");
+alert("Please enter full name");
 return;
 }
 
 if(phone.length < 11){
-alert("Enter Valid Phone Number");
+alert("Please enter valid mobile number");
+return;
+}
+
+if(email.length < 5){
+alert("Please enter valid email");
 return;
 }
 
 if(address.length < 15){
-alert("Enter Complete Address");
+alert("Please enter complete address");
 return;
 }
 
-let hdd = document.getElementById("hdd").value;
-let type = document.getElementById("type").value;
-let price = prices[hdd][type];
+const hdd = document.getElementById("hdd").value;
+const type = document.getElementById("type").value;
 
-let total = 0;
+let totalSize = 0;
 
 for(let i=0;i<selectedGames.length;i++){
-total += selectedGames[i].size;
+totalSize += selectedGames[i].size;
 }
 
-if(total > freeSpace[hdd]){
-alert("Selected HDD Full. Please choose bigger HDD.");
+if(totalSize > freeSpace[hdd]){
+
+alert("Selected HDD full. Please choose bigger HDD.");
+
 return;
+
 }
 
-let msg = "New Order%0A";
-msg += "Name: " + name + "%0A";
-msg += "Phone: " + phone + "%0A";
-msg += "Address: " + address + "%0A";
-msg += "HDD: " + hdd + " GB%0A";
-msg += "Type: " + type + "%0A";
-msg += "Price: Rs " + price + "%0A";
-msg += "Games:%0A";
+const price = prices[hdd][type];
+const advance = advanceAmounts[hdd];
+const cod = price - advance;
+
+let msg = "🛒 NEW ORDER RECEIVED%0A%0A";
+
+msg += "👤 Customer: " + name + "%0A";
+msg += "📱 Phone: " + phone + "%0A";
+msg += "📧 Email: " + email + "%0A%0A";
+
+msg += "📍 Address:%0A" + address + "%0A%0A";
+
+msg += "💽 HDD: " + hdd + " GB " + type + "%0A";
+msg += "💰 Total Price: Rs " + price + "%0A";
+msg += "💵 Advance: Rs " + advance + "%0A";
+msg += "🚚 Remaining COD: Rs " + cod + "%0A%0A";
+
+msg += "🎮 Games:%0A";
 
 for(let i=0;i<selectedGames.length;i++){
-msg += selectedGames[i].name + " - " + selectedGames[i].size + "GB%0A";
+msg += (i+1) + ". " + selectedGames[i].name + " - " + selectedGames[i].size + "GB%0A";
 }
 
-window.open("https://wa.me/923262281245?text=" + msg);
+msg += "%0A📸 Customer will send payment screenshot.";
+
+window.open("https://wa.me/923262281245?text=" + msg,"_blank");
+
 }
 
 loadGames();
