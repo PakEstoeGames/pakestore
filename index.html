@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,35 +20,29 @@
 
 <label>Please Select Your Hard Drive</label>
 <select id="storage" onchange="updateAll()">
-<option value="320">320 GB</option>
-<option value="500" selected>500 GB</option>
+<option value="320" selected>320 GB</option>
+<option value="500">500 GB</option>
 <option value="1000">1 TB</option>
 <option value="2000">2 TB</option>
 </select>
 
 <label>Please Select Your Hard Drive Variant</label>
 <select id="variant" onchange="updateAll()">
+<option value="portable" selected>Portable HDD</option>
 <option value="internal">Internal HDD</option>
-<option value="portable">Portable HDD</option>
 </select>
 
-<!-- WHITE INFO BOX SAME OLD STYLE -->
-
 <div class="infoBox">
-<p id="price">Price: Rs 0</p>
+<p id="price">Price: Rs 6500</p>
 <p id="selectedSize">Selected Games Size: 0 GB</p>
-<p id="remaining">Remaining Space: 0 GB</p>
+<p id="remaining">Remaining Space: 290 GB</p>
 </div>
 
 <h2>Select Games</h2>
 
-<!-- SCROLLABLE GAMES LIST -->
-
 <div class="gamesScroll">
 <div id="gamesList"></div>
 </div>
-
-<!-- BIG FIXED NEXT BUTTON -->
 
 <div class="bottomBar">
 <button class="mainBtn" onclick="goNext()">Next</button>
@@ -62,36 +57,24 @@
 <h2>Customer Details</h2>
 
 <input type="text" id="name" placeholder="Full Name">
-
 <input type="text" id="phone" placeholder="Mobile Number">
-
 <input type="email" id="email" placeholder="Email Address">
-
 <textarea id="address" placeholder="Complete Address"></textarea>
 
 <div class="paymentBox">
-
 <h3>Payment Details</h3>
-
 <p><b>Bank:</b> Bank Alfalah</p>
-
 <p><b>Title:</b> Pak E Store</p>
-
 <p><b>Account:</b> 02161009500017</p>
-
 <p><b>IBAN:</b> PK50ALFH0216001009500017</p>
-
 </div>
 
-<button class="mainBtn" onclick="placeOrder()">
-Buy Now
-</button>
+<button class="mainBtn" onclick="placeOrder()">Buy Now</button>
 
 </div>
 
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
