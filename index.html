@@ -1,20 +1,24 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pak Games Store</title>
+<title>Pak E Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
 
-<h1>Pak Games Store</h1>
+<h1>Pak E Store</h1>
+<p class="sub">Games Loading Store</p>
 
-<input type="text" id="name" placeholder="Customer Name">
+<input type="text" id="name" placeholder="Full Name">
 
-<input type="text" id="phone" placeholder="Phone Number">
+<input type="text" id="phone" placeholder="Mobile Number">
+
+<input type="email" id="email" placeholder="Email Address">
 
 <textarea id="address" placeholder="Complete Address with House No / Area / City"></textarea>
 
@@ -38,7 +42,38 @@
 
 <div id="warning"></div>
 
-<button onclick="sendOrder()">Confirm Order</button>
+<div class="payment">
+
+<h2>Payment Details</h2>
+
+<p><b>Bank:</b> Bank Alfalah</p>
+<p><b>Title:</b> Pak E Store</p>
+
+<p><b>Account Number:</b><br>
+02161009500017</p>
+
+<button onclick="copyText('02161009500017')">
+Copy Account Number
+</button>
+
+<p><b>IBAN:</b><br>
+PK50ALFH0216001009500017</p>
+
+<button onclick="copyText('PK50ALFH0216001009500017')">
+Copy IBAN
+</button>
+
+<p class="note">
+Place order first, then transfer advance payment.
+Remaining amount Cash on Delivery.
+Send payment screenshot on WhatsApp.
+</p>
+
+</div>
+
+<button class="mainBtn" onclick="sendOrder()">
+Confirm Order
+</button>
 
 </div>
 
