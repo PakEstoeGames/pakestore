@@ -6,7 +6,9 @@ const games = [
 {name:"Resident Evil Village", size:45},
 {name:"Watch Dogs 2", size:40},
 {name:"Hogwarts Legacy", size:80},
-{name:"Spider Man 2", size:95}
+{name:"Spider Man 2", size:95},
+{name:"Tekken 8", size:65},
+{name:"Far Cry 6", size:70}
 ];
 
 const prices = {
@@ -29,16 +31,18 @@ function loadGames(){
 
 let html = "";
 
-games.forEach((game,index)=>{
+for(let i=0; i<games.length; i++){
 
 html += `
 <div class="game">
-<input type="checkbox" onchange="toggleGame(${index})">
-${game.name} - ${game.size} GB
+<label>
+<input type="checkbox" onchange="toggleGame(${i})">
+${games[i].name} - ${games[i].size} GB
+</label>
 </div>
 `;
 
-});
+}
 
 document.getElementById("gamesList").innerHTML = html;
 }
@@ -47,8 +51,10 @@ function toggleGame(index){
 
 let game = games[index];
 
-if(selectedGames.includes(game)){
-selectedGames = selectedGames.filter(g => g !== game);
+let found = selectedGames.find(g => g.name === game.name);
+
+if(found){
+selectedGames = selectedGames.filter(g => g.name !== game.name);
 }else{
 selectedGames.push(game);
 }
@@ -63,19 +69,18 @@ let type = document.getElementById("type").value;
 
 let price = prices[hdd][type];
 
-let totalSize = 0;
+let total = 0;
 
-selectedGames.forEach(game=>{
-totalSize += game.size;
-});
+for(let i=0; i<selectedGames.length; i++){
+total += selectedGames[i].size;
+}
 
-let remain = freeSpace[hdd] - totalSize;
+let remain = freeSpace[hdd] - total;
 
-document.getElementById("priceBox").innerHTML = `
-Price: Rs ${price}<br>
-Used Space: ${totalSize} GB<br>
-Remaining Space: ${remain} GB
-`;
+document.getElementById("priceBox").innerHTML =
+"Price: Rs " + price +
+"<br>Selected Games Size: " + total + " GB" +
+"<br>Remaining Space: " + remain + " GB";
 }
 
 function sendOrder(){
@@ -85,14 +90,14 @@ let type = document.getElementById("type").value;
 let price = prices[hdd][type];
 
 let msg = "New Order%0A";
-msg += "HDD: " + hdd + " GB%0A";
+msg += "HDD: " + hdd + "GB%0A";
 msg += "Type: " + type + "%0A";
 msg += "Price: Rs " + price + "%0A";
 msg += "Games:%0A";
 
-selectedGames.forEach(game=>{
-msg += game.name + " - " + game.size + "GB%0A";
-});
+for(let i=0; i<selectedGames.length; i++){
+msg += selectedGames[i].name + " - " + selectedGames[i].size + "GB%0A";
+}
 
 window.open("https://wa.me/923262281245?text=" + msg);
 }
