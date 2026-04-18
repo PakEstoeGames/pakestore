@@ -81,7 +81,7 @@ font-weight:500;
 /* Scrollable Games List */
 
 .gamesScroll{
-max-height:430px;
+height:70vh;
 overflow-y:auto;
 padding-right:4px;
 margin-bottom:95px;
