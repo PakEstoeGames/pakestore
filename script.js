@@ -1,4 +1,18 @@
-/* script.js FINAL - No Browser Alert */
+/* Final Matching JS - Multi Step Pak E Store */
+
+const prices = {
+320:{portable:6500,internal:5000},
+500:{portable:8000,internal:6500},
+1000:{portable:18500,internal:16500},
+2000:{portable:33500,internal:31500}
+};
+
+const freeSpace = {
+320:290,
+500:450,
+1000:930,
+2000:1830
+};
 
 const games = [
 {name:"Grand Theft Auto 5 Legacy with Pakistani Modes",size:150},
@@ -161,63 +175,27 @@ const games = [
 {name:"Ghost Of Tsushima",size:70}
 ];
 
-const prices = {
-320:{portable:6500,internal:5000},
-500:{portable:8000,internal:6500},
-1000:{portable:18500,internal:16500},
-2000:{portable:33500,internal:31500}
-};
 
-const freeSpace = {
-320:290,
-500:450,
-1000:930,
-2000:1830
-};
-
-const advanceAmounts = {
-320:500,
-500:1500,
-1000:5000,
-2000:10000
-};
-
-let selectedGames = [];
-
-/* Custom Popup */
-
-function showPopup(text){
-document.getElementById("popupText").innerText = text;
-document.getElementById("popup").style.display = "flex";
-}
-
-function closePopup(){
-document.getElementById("popup").style.display = "none";
-}
-
-/* On Load */
+/* Start */
 
 window.onload = function(){
-loadGames();
+renderGames();
 updateAll();
-showPopup("Welcome to Pak E Store");
 };
 
-/* Load Games */
+/* Render Games */
 
-function loadGames(){
+function renderGames(){
 
 let html = "";
 
 for(let i=0;i<games.length;i++){
 
 html += `
-<div class="game">
 <label class="gameRow">
 <span>${games[i].name} - ${games[i].size} GB</span>
-<input type="checkbox" onchange="toggleGame(${i})">
+<input type="checkbox" value="${i}" onchange="updateAll()">
 </label>
-</div>
 `;
 
 }
@@ -226,144 +204,185 @@ document.getElementById("gamesList").innerHTML = html;
 
 }
 
-/* Select Game */
-
-function toggleGame(index){
-
-const game = games[index];
-
-const exists = selectedGames.find(item => item.name === game.name);
-
-if(exists){
-selectedGames = selectedGames.filter(item => item.name !== game.name);
-}else{
-selectedGames.push(game);
-}
-
-updateAll();
-
-}
-
-/* Update Price */
+/* Update */
 
 function updateAll(){
 
-const hdd = document.getElementById("hdd").value;
-const type = document.getElementById("type").value;
+const storage =
+document.getElementById("storage").value;
 
-const price = prices[hdd][type];
+const variant =
+document.getElementById("variant").value;
 
-let totalSize = 0;
+const price =
+prices[storage][variant];
 
-for(let i=0;i<selectedGames.length;i++){
-totalSize += selectedGames[i].size;
-}
+let total = 0;
 
-const remain = freeSpace[hdd] - totalSize;
+const checks =
+document.querySelectorAll("#gamesList input");
 
-document.getElementById("priceBox").innerHTML = `
-Price: Rs ${price}<br>
-Selected Games Size: ${totalSize} GB<br>
-Remaining Space: ${remain} GB
-`;
+checks.forEach(box=>{
 
-let warning = "";
+if(box.checked){
 
-if(remain < 0){
-
-if(hdd == 320) warning = "Selected HDD Full. Please choose 500 GB.";
-if(hdd == 500) warning = "Selected HDD Full. Please choose 1 TB.";
-if(hdd == 1000) warning = "Selected HDD Full. Please choose 2 TB.";
-if(hdd == 2000) warning = "Too many games selected.";
+total += games[box.value].size;
 
 }
 
-document.getElementById("warning").innerText = warning;
+});
+
+const remain =
+freeSpace[storage] - total;
+
+document.getElementById("price").innerHTML =
+"Price: Rs " + price;
+
+document.getElementById("selectedSize").innerHTML =
+"Selected Games Size: " + total + " GB";
+
+document.getElementById("remaining").innerHTML =
+"Remaining Space: " + remain + " GB";
 
 }
 
-/* Copy */
+/* Next Page */
 
-function copyText(text,type){
+function goNext(){
 
-navigator.clipboard.writeText(text);
+const storage =
+document.getElementById("storage").value;
 
-if(type=="account"){
-showPopup("Account Number Copied Successfully");
+let total = 0;
+
+const checks =
+document.querySelectorAll("#gamesList input");
+
+checks.forEach(box=>{
+
+if(box.checked){
+
+total += games[box.value].size;
+
 }
 
-if(type=="iban"){
-showPopup("IBAN Copied Successfully");
-}
+});
 
-}
+if(total === 0){
 
-/* Order */
+alert("Please Select Games");
 
-function sendOrder(){
-
-const name = document.getElementById("name").value.trim();
-const phone = document.getElementById("phone").value.trim();
-const email = document.getElementById("email").value.trim();
-const address = document.getElementById("address").value.trim();
-
-if(name.length < 3){
-showPopup("Please Enter Full Name");
 return;
+
 }
 
-if(phone.length < 11){
-showPopup("Please Enter Valid Mobile Number");
+if(total > freeSpace[storage]){
+
+alert("Selected HDD Full. Please Choose Bigger HDD");
+
 return;
+
 }
 
-if(email.length < 5){
-showPopup("Please Enter Valid Email");
+document.getElementById("page1").style.display =
+"none";
+
+document.getElementById("page2").style.display =
+"block";
+
+window.scrollTo(0,0);
+
+}
+
+/* Buy Now */
+
+function placeOrder(){
+
+const name =
+document.getElementById("name").value.trim();
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const email =
+document.getElementById("email").value.trim();
+
+const address =
+document.getElementById("address").value.trim();
+
+if(name === ""){
+
+alert("Please Enter Full Name");
+
 return;
+
 }
 
-if(address.length < 15){
-showPopup("Please Enter Complete Address");
+if(phone === ""){
+
+alert("Please Enter Mobile Number");
+
 return;
+
 }
 
-const hdd = document.getElementById("hdd").value;
-const type = document.getElementById("type").value;
+if(address === ""){
 
-let totalSize = 0;
+alert("Please Enter Complete Address");
 
-for(let i=0;i<selectedGames.length;i++){
-totalSize += selectedGames[i].size;
-}
-
-if(totalSize > freeSpace[hdd]){
-showPopup("Selected HDD Full. Please Choose Bigger HDD");
 return;
+
 }
 
-const price = prices[hdd][type];
-const advance = advanceAmounts[hdd];
+const storage =
+document.getElementById("storage").value;
+
+const variant =
+document.getElementById("variant").value;
+
+const price =
+prices[storage][variant];
+
+let total = 0;
+let selectedGames = "";
+
+const checks =
+document.querySelectorAll("#gamesList input");
+
+checks.forEach(box=>{
+
+if(box.checked){
+
+total += games[box.value].size;
+
+selectedGames +=
+games[box.value].name + ", ";
+
+}
+
+});
+
+const advance = 500;
 const cod = price - advance;
 
-let msg = "🛒 NEW ORDER RECEIVED%0A%0A";
+let msg = "🛒 Pak E Store Order%0A%0A";
 
-msg += "👤 Customer: " + name + "%0A";
+msg += "👤 Name: " + name + "%0A";
 msg += "📱 Phone: " + phone + "%0A";
-msg += "📧 Email: " + email + "%0A%0A";
+msg += "📧 Email: " + email + "%0A";
+msg += "📍 Address: " + address + "%0A%0A";
 
-msg += "📍 Address:%0A" + address + "%0A%0A";
+msg += "💽 HDD: " + storage + " GB%0A";
+msg += "📦 Variant: " + variant + "%0A";
+msg += "🎮 Games: " + selectedGames + "%0A";
+msg += "📀 Size: " + total + " GB%0A";
+msg += "💰 Total: Rs " + price + "%0A";
+msg += "💵 Advance: Rs 500%0A";
+msg += "🚚 Cash On Delivery: Rs " + cod;
 
-msg += "💽 HDD: " + hdd + " GB " + type + "%0A";
-msg += "💰 Total Price: Rs " + price + "%0A";
-msg += "💵 Advance: Rs " + advance + "%0A";
-msg += "🚚 Cash on Delivery: Rs " + cod + "%0A%0A";
-
-msg += "🎮 Games:%0A";
-
-for(let i=0;i<selectedGames.length;i++){
-msg += (i+1) + ". " + selectedGames[i].name + " - " + selectedGames[i].size + "GB%0A";
-}
-
-window.open("https://wa.me/923262281245?text=" + msg,"_blank");
+window.open(
+"https://wa.me/923262281245?text=" + msg,
+"_blank"
+);
 
 }
