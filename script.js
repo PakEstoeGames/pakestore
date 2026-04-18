@@ -1,4 +1,8 @@
-/* script.js */
+/* script.js
+Fix:
+✅ Website price box se Advance/COD remove
+✅ WhatsApp message me Advance/COD rahega
+*/
 
 alert("Welcome to Pak E Store");
 
@@ -44,9 +48,9 @@ for(let i=0;i<games.length;i++){
 
 html += `
 <div class="game">
-<label>
+<label class="gameRow">
+<span>${games[i].name} - ${games[i].size} GB</span>
 <input type="checkbox" onchange="toggleGame(${i})">
-${games[i].name} - ${games[i].size} GB
 </label>
 </div>
 `;
@@ -88,13 +92,9 @@ totalSize += selectedGames[i].size;
 
 const remain = freeSpace[hdd] - totalSize;
 
-const advance = advanceAmounts[hdd];
-const cod = price - advance;
-
+/* WEBSITE PAR SIRF YEH SHOW HOGA */
 document.getElementById("priceBox").innerHTML = `
 Price: Rs ${price}<br>
-Advance: Rs ${advance}<br>
-Cash on Delivery: Rs ${cod}<br>
 Selected Games Size: ${totalSize} GB<br>
 Remaining Space: ${remain} GB
 `;
@@ -111,14 +111,6 @@ if(hdd == 2000) warning = "Too many games selected.";
 }
 
 document.getElementById("warning").innerHTML = warning;
-
-}
-
-function copyText(text){
-
-navigator.clipboard.writeText(text);
-
-alert("Copied Successfully");
 
 }
 
@@ -159,16 +151,15 @@ totalSize += selectedGames[i].size;
 }
 
 if(totalSize > freeSpace[hdd]){
-
 alert("Selected HDD full. Please choose bigger HDD.");
-
 return;
-
 }
 
 const price = prices[hdd][type];
 const advance = advanceAmounts[hdd];
 const cod = price - advance;
+
+/* WHATSAPP MESSAGE ME ADVANCE RAHEGA */
 
 let msg = "🛒 NEW ORDER RECEIVED%0A%0A";
 
@@ -181,15 +172,13 @@ msg += "📍 Address:%0A" + address + "%0A%0A";
 msg += "💽 HDD: " + hdd + " GB " + type + "%0A";
 msg += "💰 Total Price: Rs " + price + "%0A";
 msg += "💵 Advance: Rs " + advance + "%0A";
-msg += "🚚 Remaining COD: Rs " + cod + "%0A%0A";
+msg += "🚚 Cash on Delivery: Rs " + cod + "%0A%0A";
 
 msg += "🎮 Games:%0A";
 
 for(let i=0;i<selectedGames.length;i++){
 msg += (i+1) + ". " + selectedGames[i].name + " - " + selectedGames[i].size + "GB%0A";
 }
-
-msg += "%0A📸 Customer will send payment screenshot.";
 
 window.open("https://wa.me/923262281245?text=" + msg,"_blank");
 
