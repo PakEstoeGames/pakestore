@@ -31,6 +31,8 @@
 <option value="portable">Portable HDD</option>
 </select>
 
+<!-- WHITE INFO BOX SAME OLD STYLE -->
+
 <div class="infoBox">
 <p id="price">Price: Rs 0</p>
 <p id="selectedSize">Selected Games Size: 0 GB</p>
@@ -39,9 +41,17 @@
 
 <h2>Select Games</h2>
 
-<div id="gamesList"></div>
+<!-- SCROLLABLE GAMES LIST -->
 
-<button onclick="goNext()">Next</button>
+<div class="gamesScroll">
+<div id="gamesList"></div>
+</div>
+
+<!-- BIG FIXED NEXT BUTTON -->
+
+<div class="bottomBar">
+<button class="mainBtn" onclick="goNext()">Next</button>
+</div>
 
 </div>
 
@@ -52,8 +62,11 @@
 <h2>Customer Details</h2>
 
 <input type="text" id="name" placeholder="Full Name">
+
 <input type="text" id="phone" placeholder="Mobile Number">
+
 <input type="email" id="email" placeholder="Email Address">
+
 <textarea id="address" placeholder="Complete Address"></textarea>
 
 <div class="paymentBox">
@@ -61,18 +74,24 @@
 <h3>Payment Details</h3>
 
 <p><b>Bank:</b> Bank Alfalah</p>
+
 <p><b>Title:</b> Pak E Store</p>
+
 <p><b>Account:</b> 02161009500017</p>
+
 <p><b>IBAN:</b> PK50ALFH0216001009500017</p>
 
 </div>
 
-<button onclick="placeOrder()">Buy Now</button>
+<button class="mainBtn" onclick="placeOrder()">
+Buy Now
+</button>
 
 </div>
 
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
