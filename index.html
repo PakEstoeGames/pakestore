@@ -1,92 +1,78 @@
-<!-- index.html FINAL NO ALERT -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Pak E Store</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
 <h1>Pak E Store</h1>
-<p class="sub">Premium Games Loading Store</p>
+<p class="subtitle">Premium Games Loading Store</p>
 
-<input type="text" id="name" placeholder="Full Name">
-<input type="text" id="phone" placeholder="Mobile Number">
-<input type="email" id="email" placeholder="Email Address">
-<textarea id="address" placeholder="Complete Address with House No / Area / City"></textarea>
+<!-- PAGE 1 -->
 
-<select id="hdd" onchange="updateAll()">
+<div id="page1">
+
+<label>Please Select Your Hard Drive</label>
+<select id="storage" onchange="updateAll()">
 <option value="320">320 GB</option>
-<option value="500">500 GB</option>
+<option value="500" selected>500 GB</option>
 <option value="1000">1 TB</option>
 <option value="2000">2 TB</option>
 </select>
 
-<select id="type" onchange="updateAll()">
-<option value="portable">Portable HDD</option>
+<label>Please Select Your Hard Drive Variant</label>
+<select id="variant" onchange="updateAll()">
 <option value="internal">Internal HDD</option>
+<option value="portable">Portable HDD</option>
 </select>
 
-<div id="priceBox"></div>
+<div class="infoBox">
+<p id="price">Price: Rs 0</p>
+<p id="selectedSize">Selected Games Size: 0 GB</p>
+<p id="remaining">Remaining Space: 0 GB</p>
+</div>
 
 <h2>Select Games</h2>
 
 <div id="gamesList"></div>
 
-<div id="warning"></div>
+<button onclick="goNext()">Next</button>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div id="page2" style="display:none;">
+
+<h2>Customer Details</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="phone" placeholder="Mobile Number">
+<input type="email" id="email" placeholder="Email Address">
+<textarea id="address" placeholder="Complete Address"></textarea>
 
 <div class="paymentBox">
 
-<h2>Payment Details</h2>
+<h3>Payment Details</h3>
 
-<div class="payLine">
-<b>Bank:</b> Bank Alfalah
-</div>
-
-<div class="payLine">
-<b>Title:</b> Pak E Store
-</div>
-
-<div class="payLine">
-<b>Account:</b> 02161009500017
-<span class="miniCopy" onclick="copyText('02161009500017','account')">📋</span>
-</div>
-
-<div class="payLine">
-<b>IBAN:</b> PK50ALFH0216001009500017
-<span class="miniCopy" onclick="copyText('PK50ALFH0216001009500017','iban')">📋</span>
-</div>
-
-<p class="note">
-Place order first, then transfer advance payment.
-Remaining amount Cash on Delivery.
-Send screenshot on WhatsApp.
-</p>
+<p><b>Bank:</b> Bank Alfalah</p>
+<p><b>Title:</b> Pak E Store</p>
+<p><b>Account:</b> 02161009500017</p>
+<p><b>IBAN:</b> PK50ALFH0216001009500017</p>
 
 </div>
 
-<button class="mainBtn" onclick="sendOrder()">
-Place Order
-</button>
+<button onclick="placeOrder()">Buy Now</button>
 
 </div>
 
-<!-- Custom Popup -->
-
-<div id="popup" class="popup">
-<div class="popupBox">
-<p id="popupText"></p>
-<button onclick="closePopup()">OK</button>
-</div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
