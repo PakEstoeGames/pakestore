@@ -4,7 +4,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
@@ -15,14 +15,16 @@ color:#111;
 .container{
 max-width:520px;
 margin:auto;
-padding:20px 18px 120px;
+padding:20px 16px 110px;
 }
 
+/* Header */
+
 h1{
-font-size:54px;
+font-size:52px;
 font-weight:800;
 text-align:center;
-margin-top:20px;
+margin-top:18px;
 margin-bottom:8px;
 }
 
@@ -30,23 +32,19 @@ margin-bottom:8px;
 text-align:center;
 font-size:18px;
 color:#666;
-margin-bottom:28px;
+margin-bottom:24px;
 }
 
-h2{
-font-size:28px;
-font-weight:800;
-text-align:center;
-margin:22px 0 18px;
-}
+/* Labels */
 
 label{
 display:block;
 font-size:18px;
 font-weight:600;
-margin-bottom:10px;
-margin-top:18px;
+margin:14px 0 10px;
 }
+
+/* Inputs */
 
 select,
 input,
@@ -55,36 +53,48 @@ width:100%;
 border:none;
 outline:none;
 background:#fff;
-padding:20px;
-font-size:20px;
+padding:18px;
+font-size:19px;
 border-radius:24px;
 margin-bottom:14px;
 color:#111;
 }
 
 textarea{
-height:140px;
+height:130px;
 resize:none;
 }
 
+/* Info Box */
+
 .infoBox{
 background:#fff;
-padding:24px;
+padding:22px;
 border-radius:26px;
 margin-top:8px;
-margin-bottom:20px;
-line-height:2;
+margin-bottom:18px;
 font-size:18px;
-font-weight:500;
+line-height:2;
 }
 
-/* Scrollable Games List */
+/* Section Title */
+
+h2{
+font-size:30px;
+font-weight:800;
+text-align:center;
+margin:18px 0 16px;
+}
+
+/* Games Scroll Area */
 
 .gamesScroll{
 height:70vh;
 overflow-y:auto;
 padding-right:4px;
-margin-bottom:95px;
+padding-bottom:0;
+margin-bottom:0;
+scroll-behavior:smooth;
 }
 
 .gamesScroll::-webkit-scrollbar{
@@ -92,11 +102,11 @@ width:6px;
 }
 
 .gamesScroll::-webkit-scrollbar-thumb{
-background:#d0d0d0;
+background:#cfcfcf;
 border-radius:20px;
 }
 
-/* Games Row */
+/* Game Rows Compact */
 
 .gameRow{
 display:flex;
@@ -112,19 +122,23 @@ font-weight:500;
 gap:12px;
 }
 
+.gameRow:last-child{
+margin-bottom:0;
+}
+
 .gameRow span{
 flex:1;
-line-height:1.4;
+line-height:1.35;
 }
 
 .gameRow input[type="checkbox"]{
-width:30px;
-height:30px;
+width:26px;
+height:26px;
 accent-color:#2f6fe4;
 flex-shrink:0;
 }
 
-/* Fixed Bottom Button */
+/* Bottom Fixed Button */
 
 .bottomBar{
 position:fixed;
@@ -132,7 +146,7 @@ left:0;
 right:0;
 bottom:0;
 background:#efeff4;
-padding:14px 16px 20px;
+padding:8px 14px 10px;
 z-index:999;
 }
 
@@ -146,8 +160,8 @@ background:#2f6fe4;
 color:#fff;
 font-size:24px;
 font-weight:700;
-padding:20px;
-border-radius:26px;
+padding:18px;
+border-radius:24px;
 cursor:pointer;
 }
 
@@ -155,17 +169,17 @@ cursor:pointer;
 
 .paymentBox{
 background:#fff;
-padding:24px;
+padding:22px;
 border-radius:26px;
 margin:18px 0;
-line-height:2;
 font-size:18px;
+line-height:2;
 }
 
 .paymentBox h3{
-font-size:28px;
-margin-bottom:12px;
 text-align:center;
+font-size:28px;
+margin-bottom:10px;
 }
 
 /* Mobile */
@@ -173,7 +187,7 @@ text-align:center;
 @media(max-width:600px){
 
 .container{
-padding:18px 14px 120px;
+padding:18px 14px 105px;
 }
 
 h1{
@@ -192,7 +206,7 @@ select,
 input,
 textarea{
 font-size:18px;
-padding:18px;
+padding:16px;
 border-radius:22px;
 }
 
@@ -201,21 +215,31 @@ font-size:17px;
 padding:20px;
 }
 
+.gamesScroll{
+height:68vh;
+padding-bottom:0;
+margin-bottom:0;
+}
+
 .gameRow{
-font-size:17px;
-min-height:72px;
-padding:14px 16px;
+padding:7px 12px;
+min-height:48px;
+font-size:16px;
+margin-bottom:9px;
 }
 
 .gameRow input[type="checkbox"]{
-width:28px;
-height:28px;
+width:24px;
+height:24px;
+}
+
+.bottomBar{
+padding:8px 12px 10px;
 }
 
 .mainBtn{
 font-size:22px;
-padding:18px;
-border-radius:24px;
+padding:16px;
 }
 
 }
